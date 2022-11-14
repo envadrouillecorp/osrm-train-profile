@@ -58,27 +58,29 @@ function process_way(profile, way, result, relations)
         data.railway ~= 'rail' and
         data.railway ~= 'turntable' and
         data.railway ~= 'traverser' and
+        data.railway ~= 'light_rail' and
+        data.railway ~= 'narrow_gauge' and
         data.railway  ~= 'ferry'
     ) then
         return
     -- Remove military and tourism rails
-    elseif (
-        data.usage == "military" or
-        data.usage == "tourism"
-    ) then
-        return
+    --elseif (
+    --    data.usage == "military" or
+    --    data.usage == "tourism"
+    --) then
+    --    return
     -- Keep only most common gauges (and undefined)
     -- uses .find() as some gauges are specified like "1668;1435"
-    elseif (
-        data.gauge ~= nil and
-        data.gauge ~= 1000 and not string.find(data.gauge, "1000") and
-        data.gauge ~= 1435 and not string.find(data.gauge, "1435") and
-        data.gauge ~= 1520 and not string.find(data.gauge, "1520") and
-        data.gauge ~= 1524 and not string.find(data.gauge, "1524") and
-        data.gauge ~= 1600 and not string.find(data.gauge, "1600") and
-        data.gauge ~= 1668 and not string.find(data.gauge, "1668")
-   ) then
-        return
+    --elseif (
+    --    data.gauge ~= nil and
+    --    data.gauge ~= 1000 and not string.find(data.gauge, "1000") and
+    --    data.gauge ~= 1435 and not string.find(data.gauge, "1435") and
+    --    data.gauge ~= 1520 and not string.find(data.gauge, "1520") and
+    --    data.gauge ~= 1524 and not string.find(data.gauge, "1524") and
+    --    data.gauge ~= 1600 and not string.find(data.gauge, "1600") and
+    --    data.gauge ~= 1668 and not string.find(data.gauge, "1668")
+   --) then
+   --     return
     end
 
     local is_secondary = (
