@@ -44,6 +44,7 @@ end
 function process_way(profile, way, result, relations)
     local data = {
         railway = way:get_value_by_key("railway"),
+        route = way:get_value_by_key("route"),
         service = way:get_value_by_key("service"),
         usage = way:get_value_by_key("usage"),
         maxspeed = way:get_value_by_key("maxspeed"),
@@ -51,7 +52,9 @@ function process_way(profile, way, result, relations)
     }
 
     -- Remove everything that is not railway
-    if not data.railway then
+    if data.route and data.route == 'ferry' then
+	    -- ok
+    elseif not data.railway then
         return
     -- Remove everything that is not a rail, a turntable, a traverser
     elseif (
@@ -60,6 +63,9 @@ function process_way(profile, way, result, relations)
         data.railway ~= 'traverser' and
         data.railway ~= 'light_rail' and
         data.railway ~= 'narrow_gauge' and
+        data.railway ~= 'funicular' and
+        data.railway ~= 'tram' and
+        data.railway ~= 'subway' and
         data.railway  ~= 'ferry'
     ) then
         return
